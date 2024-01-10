@@ -7,6 +7,7 @@ import {
   getOtherUserDetail,
   getOtherUserPost,
   getUserById,
+  getUserProfile,
   loginUser,
   registerUser,
   unfollowUser,
@@ -29,5 +30,7 @@ router.route("/follow/:id").post(Authenticate, followUser);
 router.route("/unfollow/:id").post(Authenticate, unfollowUser);
 router.route("/get-other-user-details").get(getOtherUserDetail);
 router.route("/other-user-posts/:id").get(Authenticate, getOtherUserPost);
+
+router.route("/profile/:userId").get(getUserProfile);
 
 export const userRouter = router;

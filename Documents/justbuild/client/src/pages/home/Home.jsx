@@ -1,31 +1,9 @@
 import { Link } from "react-router-dom";
-import Testimonial from "../testimonial/Testimonial";
 import About from "../about/About";
-import { useDispatch, useSelector } from "react-redux";
-import { hideLoading, showLoading } from "../../redux/reducers/alertsSlice";
-import { getAllUsers } from "../../redux/actions/otherProfileAction";
-import DisplayUserList from "../../compoents/otherUser/DisplayUserList";
-import { FaAngleDown } from "react-icons/fa";
-import { useState } from "react";
-import { clearAllUsers } from "../../redux/reducers/otherProfileReducer";
 import RandomPosts from "../../compoents/otherUser/RandomPosts";
 
 const Home = () => {
   const token = localStorage.getItem("token");
-  const { Users } = useSelector((state) => state.allUsers);
-  const dispatch = useDispatch();
-  const [hide, setHide] = useState(true);
-
-  const handleShowUsers = async () => {
-    dispatch(showLoading());
-    if (hide) {
-      await dispatch(getAllUsers());
-    } else {
-      dispatch(clearAllUsers());
-    }
-    setHide(!hide);
-    dispatch(hideLoading());
-  };
   return (
     <div className="flex flex-col items-center justify-center min-h-[80vh] bg-gray-100 mt-14">
       <header className="py-8">
@@ -74,19 +52,6 @@ const Home = () => {
         </div>
       </main>
 
-      <Testimonial />
-      <div>
-        <button
-          onClick={handleShowUsers}
-          className="font-semibold text-white flex justify-center items-center px-2 py-2 bg-orange-500 rounded-md"
-        >
-          <span>{hide ? "Show More" : "Hide"}</span>
-          <span className="mt-1">
-            <FaAngleDown size={20} />
-          </span>
-        </button>
-        {!hide && <DisplayUserList />}
-      </div>
       <About />
 
       <RandomPosts />

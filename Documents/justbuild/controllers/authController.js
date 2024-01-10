@@ -356,3 +356,17 @@ export const forgetPassword = catchAsyncError(async (req, res, next) => {
 //     });
 //   }
 // };
+
+export const getUserProfile = catchAsyncError(async (req, res, next) => {
+  const { userId } = req.params;
+  // console.log(userId);
+  if (!userId) {
+    return next(new ErrorHandler("Please enter id", 400, false));
+  }
+  const user = await UserModel.findOne({ _id: userId });
+  res.status(200).json({
+    success: true,
+    message: "profile found",
+    data: user,
+  });
+});

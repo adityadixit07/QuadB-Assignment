@@ -14,6 +14,7 @@ import UserProfile from "./compoents/user/UserProfile";
 import ProtectedRoute from "./utils/ProtectedRoute";
 import PostForm from "./pages/post/PostForm";
 import SinglePost from "./pages/post/SinglePost";
+import SeeProfile from "./compoents/profile/SeeProfile";
 
 const App = () => {
   const { loading } = useSelector((state) => state.alerts);
@@ -52,6 +53,7 @@ const App = () => {
           }
         />
         <Route path="/user/post/:postId" element={<SinglePost />} />
+        <Route path='/user/profile/:userId' element={<SeeProfile/>}/>
       </Routes>
     </BrowserRouter>
   );

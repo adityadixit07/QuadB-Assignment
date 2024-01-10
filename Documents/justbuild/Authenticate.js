@@ -30,7 +30,7 @@ const Authenticate = async (req, res, next) => {
     jwt.verify(token, process.env.JWT_SECRET_KEY, (err, decoded) => {
       if (err) {
         return res.status(401).send({
-          message: "Auth failed",
+          message: "Please login first!",
           success: false,
         });
       } else {

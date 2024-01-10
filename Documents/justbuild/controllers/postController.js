@@ -66,13 +66,7 @@ export const getAllPost = catchAsyncError(async (req, res, next) => {
   // console.log(req.params.id + "params id");
   // console.log(req.user.id + "user id");
   if (req.params.id != req.body.userId) {
-    return next(
-      new ErrorHandler(
-        "Unauthorized, You can't see someones else post",
-        401,
-        false
-      )
-    );
+    return next(new ErrorHandler("Please Login", 401, false));
   }
   const posts = await PostModel.find({ userId: req.params.id });
   if (!posts) {
@@ -152,4 +146,29 @@ export const getRandomPost = catchAsyncError(async (req, res, next) => {
   ]);
 
   res.status(200).json({ success: true, data: randomPosts });
+});
+
+export const getUserPost = catchAsyncError(async (req, res, next) => {
+  const { userId } = req.params; // Extracting userId from request parameters
+console.log(userId);
+  if (!userId) {
+    return next(new ErrorHandler("User ID is missing", 400, false));
+  }
+
+  try {
+    // Assuming PostModel contains the posts and userId is a field in each post
+    const userPosts = await PostModel.find({ userId }); // Find posts based on userId
+
+    if (!userPosts || userPosts.length === 0) {
+      return next(new ErrorHandler("No posts found for this user", 404, false));
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Posts fetched successfully",
+      data: userPosts,
+    });
+  } catch (error) {
+    return next(new ErrorHandler("Error fetching user posts", 500, false));
+  }
 });

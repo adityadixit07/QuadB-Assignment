@@ -60,7 +60,7 @@ const SinglePost = () => {
   };
 
   return (
-    <div className="container mx-auto mt-8 ">
+      <div className="container mx-auto mt-[8rem] ">
       <div className="max-w-screen-md mx-auto bg-white rounded-lg overflow-hidden shadow-md">
         <div className="p-4">
           <div className="flex justify-between">
@@ -95,7 +95,7 @@ const SinglePost = () => {
           <img
             src={post?.imageUrl}
             alt="post image"
-            className="w-full h-auto rounded-md"
+            className="w-full h-[300px] rounded-md object-contain"
           />
           <p className="text-base mt-4">
             {isEditing ? (
